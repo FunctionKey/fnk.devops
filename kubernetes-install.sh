@@ -12,3 +12,6 @@ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 
 # Actualy install kubernetes
 sudo apt install -y kubeadm kubelet kubectl
+
+# Verify the version of each of the tools on each machine.
+sudo kubeadm version && kubelet --version && kubectl version
