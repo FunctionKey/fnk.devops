@@ -15,3 +15,18 @@ sudo apt install -y kubeadm kubelet kubectl
 
 # Verify the version of each of the tools on each machine.
 sudo kubeadm version && kubelet --version && kubectl version
+
+# Execute the following commands [ON MASTER] for IPtables to see bridged traffic.
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
+
+# Disable swap [ON ALL NODES]
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
