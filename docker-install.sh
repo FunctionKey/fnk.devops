@@ -28,7 +28,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io
 sudo systemctl start docker
 sudo systemctl enable docker
 # verify that docker if running
-docker container ls
+sudo docker container ls
 
 # Use hello-world image to verify that Docker Engine is installed correctly
 sudo docker run hello-world
