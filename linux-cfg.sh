@@ -46,3 +46,9 @@ sudo /etc/init.d/networking restart
 
 # Apply Netplan configuration
 sudo netplan apply
+
+# Configure Firewall if needed
+sudo ufw app list
+sudo ufw allow openssh
+sudo ufw enable
+sudo ufw start
