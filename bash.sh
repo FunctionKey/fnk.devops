@@ -16,3 +16,8 @@ bash file.sh
 
 # Reset VM's ssh key in case VM is reseted itself
 sudo ssh-keygen -f "/home/fnk/.ssh/known_hosts" -R "192.168.4.22"
+
+# Change the owner of /file to "root"
+chown root /file
+# Likewise, but also change its group to "staff"
+chown root:staff /file
