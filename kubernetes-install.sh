@@ -16,6 +16,10 @@ sudo apt install -y kubeadm kubelet kubectl
 # Verify the version of each of the tools on each machine.
 sudo kubeadm version && kubelet --version && kubectl version
 
+# Run this code if if "systemctl status kubelet" returns "Active: activating"
+systemctl start kubelet
+systemctl status kubelet
+
 # Execute the following commands [ON MASTER] for IPtables to see bridged traffic.
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
@@ -30,3 +34,6 @@ sudo sysctl --system
 # Disable swap [ON ALL NODES]
 sudo swapoff -a
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+# Check cluster
+sudo kubectl cluster-info
