@@ -16,7 +16,7 @@ sudo service kubelet restart
     sudo kubeadm init \
         --apiserver-advertise-address=$IPADDR  \
         --apiserver-cert-extra-sans=$IPADDR  \
-        --pod-network-cidr=192.168.0.0/16 \
+        --pod-network-cidr=10.244.0.0/16 \
         --node-name $NODENAME #\
         #--ignore-preflight-errors Swap   # not required if disabled in kubernetes-install.sh
 
