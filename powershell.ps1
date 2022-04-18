@@ -22,3 +22,36 @@ Test-ADDSForestInstallation -DomainName "fnk.lab.local" -InstallDns
 Install-ADDSForest -DomainName "fnk.lab.local" -InstallDNS
 
 #endregion
+
+#Region Active Directory
+# Create a new AD User
+New-ADUser `
+    -Name "Kevin Sapp" `
+    -GivenName "Kevin" `
+    -Surname "Sapp" `
+    -SamAccountName "kesapp-test" `
+    -AccountPassword (Read-Host -AsSecureString "Input User Password") `
+    -ChangePasswordAtLogon $True `
+    -Company "Code Duet" `
+    -Title "CEO" `
+    -State "California" `
+    -City "San Francisco" `
+    -Description "Test Account Creation" `
+    -EmployeeNumber "45" `
+    -Department "Engineering" `
+    -DisplayName "Kevin Sapp (Test)" `
+    -Country "us" `
+    -PostalCode "940001" `
+    -Enabled $True
+
+# Copy an existing account
+$template_account = Get-ADUser -Identity kesapp-test -Properties State,Department,Country,-City # Not all properties can be copied over to other users. wildcard won't work here
+$template_account.UserPrincipalName = $null # UPN must be unique accorss the AD Forest
+New-ADUser `
+    -Instance $template_account `
+    -Name 'James Brown' `
+    -SamAccountName 'jbrown' `
+    -AccountPassword (Read-Host -AsSecureString "Input User Password") `
+    -Enabled $True
+
+#endregion
