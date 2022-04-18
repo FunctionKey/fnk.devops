@@ -15,11 +15,23 @@ Set-NetAdapterBinding -Name * -ComponentID ms_tcpip6 -Enabled $false
 Set-NetConnectionProfile -InterfaceAlias * -NetworkCategory Private # Or Domain or Public
 
 # Setup Domain Controller
-Get-WindowsFeature
-Install-WindowsFeature -name AD-Domain-Services -IncludeManagementTools
-# Install-Module ActiveDirectory (included in management tools)
-Test-ADDSForestInstallation -DomainName "fnk.lab.local" -InstallDns
-Install-ADDSForest -DomainName "fnk.lab.local" -InstallDNS
+if (-not (Get-WindowsFeature "AD-Domain-Services").Installed) {
+    try {
+        Install-WindowsFeature -name "AD-Domain-Services" -IncludeManagementTools
+        # Install-Module ActiveDirectory (included in management tools)
+    }
+    catch {
+        Write-Error $_
+    }
+}
+if (Test-ADDSForestInstallation -DomainName "fnk.lab.local" -InstallDns) {
+    try {
+        Install-ADDSForest -DomainName "fnk.lab.local" -InstallDNS
+    }
+    catch {
+        Write-Error $_
+    }
+}
 
 #endregion
 
@@ -53,5 +65,10 @@ New-ADUser `
     -SamAccountName 'jbrown' `
     -AccountPassword (Read-Host -AsSecureString "Input User Password") `
     -Enabled $True
+
+#endregion
+
+#Region Desired State Configuration (DSC)
+
 
 #endregion
