@@ -66,8 +66,10 @@ New-ADUser `
     -AccountPassword (Read-Host -AsSecureString "Input User Password") `
     -Enabled $True
 
-# Unlock AD Accout
+# Manage AD Account
+Set-ADAccountPassword -Identity user.name -NewPassword (Get-Credential).Password
 Unlock-ADAccount -Identity user.name
+
 #endregion
 
 #Region Desired State Configuration (DSC)
