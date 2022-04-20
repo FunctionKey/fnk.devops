@@ -67,9 +67,11 @@ New-ADUser `
     -Enabled $True
 
 # Manage AD Account
-Set-ADAccountPassword -Identity user.name -NewPassword (Get-Credential).Password
-Unlock-ADAccount -Identity user.name
-
+# Set-ADAccountPassword -Identity user.name -NewPassword (Get-Credential).Password
+Set-ADAccountPassword -Identity "test09" -NewPassword (read-host "Pass:" -AsSecureString)
+Unlock-ADAccount -Identity "user.name"
+Set-ADUser -Identity "user.name" -SamAccountName "new.user.name"    # User logon name (pre-Windows 2000)
+Set-ADUser -Identity "user.name" -UserPrincipalName "new.user.name@domain.local"    # User logon name
 #endregion
 
 #Region Desired State Configuration (DSC)
