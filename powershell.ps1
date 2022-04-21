@@ -68,8 +68,7 @@ New-ADUser `
 
 # Manage AD Account
 # Set-ADAccountPassword -Identity user.name -NewPassword (Get-Credential).Password
-$Identity = Read-Host "Username: "
-Set-ADAccountPassword -Identity "$Identity" -NewPassword (read-host "Pass:" -AsSecureString)
+Set-ADAccountPassword -Identity (Read-Host "Username") -NewPassword (read-host "Pass" -AsSecureString)
 Unlock-ADAccount -Identity "user.name"
 Set-ADUser -Identity "user.name" -SamAccountName "new.user.name"    # User logon name (pre-Windows 2000)
 Set-ADUser -Identity "user.name" -UserPrincipalName "new.user.name@domain.local"    # User logon name
