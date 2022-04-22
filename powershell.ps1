@@ -67,11 +67,17 @@ New-ADUser `
     -Enabled $True
 
 # Manage AD Account
-# Set-ADAccountPassword -Identity user.name -NewPassword (Get-Credential).Password
 Set-ADAccountPassword -Identity (Read-Host "Username") -NewPassword (read-host "Pass" -AsSecureString)
-Unlock-ADAccount -Identity "user.name"
+Unlock-ADAccount -Identity (Read-Host "Username")
 Set-ADUser -Identity "user.name" -SamAccountName "new.user.name"    # User logon name (pre-Windows 2000)
 Set-ADUser -Identity "user.name" -UserPrincipalName "new.user.name@domain.local"    # User logon name
+#endregion
+
+#Region DHCP Server    # https://docs.microsoft.com/en-us/powershell/module/dhcpserver/?view=windowsserver2022-ps
+# Check current DHCP configuration
+Get-DhcpServerv4Scope
+# Change DHCP Scope
+Set-DhcpServerv4Scope -ScopeId 10.10.1.0 -StartRange 10.10.1.100 -EndRange 10.10.1.220
 #endregion
 
 #Region Desired State Configuration (DSC)
