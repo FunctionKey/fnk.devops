@@ -8,9 +8,11 @@ $env:PSModulePath -split (';')
 # Load Windows PowerShell modules into PowerShell v7 by invokng the -UseWindowsPowerShell switch parameter of the Import-Module command
 #endregion
 
-#Region Remote Management
+#Region Windows Remote Management
 # Check TrustedHosts list
 Get-Item WSMan:\localhost\Client\TrustedHosts
+# Check host WinRM configuration
+winrm get winrm/config
 # Add specific computers to the TrustedHosts list
 Set-Item WSMan:\localhost\Client\TrustedHosts -Value <ComputerName>,[<ComputerName>]    # Add more than one based on their hostname by separating them with a comma (,)
 # Add computers to TrustedHosts list using the IP address
