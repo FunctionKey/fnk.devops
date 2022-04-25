@@ -8,6 +8,12 @@ $env:PSModulePath -split (';')
 # Load Windows PowerShell modules into PowerShell v7 by invokng the -UseWindowsPowerShell switch parameter of the Import-Module command
 #endregion
 
+#Region Network
+# Configure IP Address
+Get-NetIPAddress
+New-NetIPAddress -IPAddress 10.0.0.4 -InterfaceIndex [Unit[int]] -DefaultGateway 10.0.0.1 -PrefixLength 24
+#endregion
+
 #Region Windows Remote Management
 # Check TrustedHosts list
 Get-Item WSMan:\localhost\Client\TrustedHosts
