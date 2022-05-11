@@ -21,3 +21,6 @@ sudo ssh-keygen -f "/home/fnk/.ssh/known_hosts" -R "192.168.4.22"
 chown root /file
 # Likewise, but also change its group to "staff"
 chown root:staff /file
+
+# Check open ports on local system
+ss -tunpo state listening   # (-t) TCP (-u) and UDP (-n) port numbers (-p) and their associated process IDs
