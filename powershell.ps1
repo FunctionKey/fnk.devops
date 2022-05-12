@@ -20,7 +20,7 @@ Get-Item WSMan:\localhost\Client\TrustedHosts
 # Check host WinRM configuration
 winrm get winrm/config
 # Add specific computers to the TrustedHosts list
-Set-Item WSMan:\localhost\Client\TrustedHosts -Value <ComputerName>,[<ComputerName>]    # Add more than one based on their hostname by separating them with a comma (,)
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value [<ComputerName>]    # Add more than one based on their hostname by separating them with a comma (,)
 # Add computers to TrustedHosts list using the IP address
 Set-Item WSMan:\localhost\Client\TrustedHosts -Value 10.10.10.1,[0:0:0:0:0:0:0:0]
 # Add all computers to TrustedHosts list
