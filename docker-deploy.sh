@@ -4,8 +4,9 @@ sudo docker pull ubuntu
 # run a Docker container named container1 using ubuntu image
 sudo docker run -d -t --name container1 ubuntu
 
-# verify that a container is running
+# list runnig containers
 sudo docker ps
+sudo docker ps -a   # list all (running and not running)
 
 # interract with container's terminal
 sudo docker exec -it container1 bash
@@ -30,3 +31,7 @@ sudo docker start container1
 
 # verify container's resource usage
 sudo docker stats
+
+# container por biding
+sudo docker run -p6000:3000 -d [IMAGE]:tag
+sudo docker run -p6001:3000 -d [IMAGE]:tag  # notice starting port change
