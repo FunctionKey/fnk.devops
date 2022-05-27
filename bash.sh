@@ -2,6 +2,9 @@
 which $SHELL
 # Ex: /bin/bash
 
+# Change current user's password
+passwd
+
 # Start every bash file with a Shebang
 # #!/bin/bash
 
